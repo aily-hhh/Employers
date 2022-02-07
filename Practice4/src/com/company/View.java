@@ -147,8 +147,11 @@ public class View
     
     public static void start()
     {
+        Log.writeInto("Start program");
         Thread thread = new Thread(new Run());
         thread.start();
+        Thread log = new Thread(new AutoSaveLog());
+        log.start();
         while (true)
         {
             System.out.println("\nSelect an action : \n\t1 - ввести нового сотрудника \n\t2 - добавить задание" +
@@ -162,9 +165,15 @@ public class View
             c = c.trim();
 
             if (c.equals("1"))
+            {
+                Log.writeInto("Created new worker");
                 newWorker();
+            }
             if (c.equals("2"))
+            {
+                Log.writeInto("Created new task");
                 newTask();
+            }
             if (c.equals("3"))
                 closeTasks();
             if (c.equals("4"))
@@ -174,13 +183,21 @@ public class View
             if (c.equals("6"))
                 taskWithMaxPremium();
             if (c.equals("7"))
+            {
+                Log.writeInto("Created new report");
                 Report.SaveClosedTasksInFile();
+            }
             if (c.equals("8"))
+            {
+                Log.writeInto("Created new list of worker");
                 SaveLoadWorkers.SaveInFile();
+            }
             if (c.equals("9"))
                 break;
         }
+        Log.writeInto("Finish program");
         Run.isActive = false;
+        log.isInterrupted();
     }
 
     public static void beginProgram(){

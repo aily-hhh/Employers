@@ -28,6 +28,8 @@ public class Run implements Runnable
                     if (Company.workerArrayList.get(count).tasksList.get(num).time ==
                             Company.workerArrayList.get(count).tasksList.get(num).executionTime)
                     {
+                        Log.writeInto(Company.workerArrayList.get(count).name + " " + Company.workerArrayList.get(count).lastName +
+                                " closed the task");
                         Company.workerArrayList.get(count).countClosedTasks++;
                         Company.workerArrayList.get(count).tasksList.get(num).open = false;
                         FinanceVariables.financeVariables(Company.workerArrayList.get(count),Company.workerArrayList.get(count).tasksList.get(num));
